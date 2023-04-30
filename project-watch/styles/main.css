@@ -3,6 +3,7 @@ html{
 }
 
 body {
+	background-image: linear-gradient(180deg, cyan, #93E9BE);
 	font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: white;
 	width: 95%;
