@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="styles/main.css">
+<main>
+	<header>
+		<h1>Watchfulness</h1>
+		<h2>Your start to healthier you.</h2>
+	</header>
+	<nav>
+		<ul style="display:grid;grid-template-columns: 1fr 1fr 1fr 1fr">
+			<li><button onclick="document.location='FAQ.html'">FAQ</button></li>
+			<li><button onclick="document.location='index.html'">Home</button></li>
+			<li><button onclick="document.location='contact.html'">Contact-Page</button></li>
+			<li><button onclicker="document.location='login-page.html'">Login/Register</button></li>
+		</ul>
+	</nav>
+  <div class="contact-login-form-container">
+    <p>Got an account? Log in to save &amp; view your calculation history!</p>
+    <form action="process-login" method="post" id="login-form">
+    	<input type="hidden" name="action" value="authenticate-user">
+		<label for="email">Email Address:</label><br>
+		<input type="email" name="email" size="30" />
+		<br>
+		<label for="password" class="add-top-margin">Password:</label><br>
+		<input type="password" name="password" size="30" />
+		<br>
+		<input type="submit" value="Log in" class="large-button">
+	</form>
+	${message}
+	<p><small>Don't have an account? <a href="register.html">Click here to register!</a></small></p>
+  </div> 
+</main>
+ 
+ 
+</body>
+</html>

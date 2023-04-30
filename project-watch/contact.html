@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Watchfulness/Contact-Page</title>
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body>
+        <header>
+            <h1>Contact Page</h1>
+        </header>
+        <nav>
+			<ul style="display:grid;grid-template-columns: 1fr 1fr 1fr">
+				<li><button onclick="document.location='FAQ.html'">FAQ</button></li>
+                <li><button onclick="document.location='index.html'">Home</button></li>
+				<li><button onclick="document.location='contact.html'">Contact-Page</button></li>
+			</ul>
+		</nav>
+
+    
+
+    <main>
+        <div class="contact-login-form-container">
+        <p>Need help? Got an idea for a feature? Contact us!</p>
+        <form action="process-contact" method="post" id="contact-form">
+            <input type="hidden" name="action" value="send-email">
+            <label for="name">Your Name:</label><br>
+            <input type="text" name="name" size="30" />
+            <label for="email" class="add-top-margin">Email Address:</label><br>
+            <input type="email" name="email" size="30" />
+            <label for="message" class="add-top-margin">Your Message:</label><br>
+        <textarea rows="5" cols="30" name="message" style="resize: none;"></textarea>
+        <br>
+        
+        <input type="submit" value="Send message" class="large-button">
+    </form>
+  </div> 
+</main>
+ 
+<c:import url="includes/footer.jsp" />
+ 
+</body>
+</html>

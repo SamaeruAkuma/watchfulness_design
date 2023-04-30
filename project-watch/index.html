@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<!--<c:import url="includes/header.html">-->
+	<link href="header.html" rel="import">
+	<link rel="stylesheet" href="styles/main.css">
+	
+	
+	<body>
+		<header>
+			<h1>Watchfulness</h1>
+			<h2>Your start to healthier you.</h2>
+		</header>
+		<nav>
+			<ul style="display:grid;grid-template-columns: 1fr 1fr 1fr 1fr">				
+				<li><button onclick="document.location='contact.html'">Contact-Page</button></li>
+				<li><button onclick="document.location='index.html'">Home</button></li>
+				<li><button onclick="document.location='FAQ.html'">FAQ</button></li>
+				<li><button onclick="document.location='login.html'">Login/Register</button></li>
+			</ul>
+		</nav>
+		<main>
+			
+			<p>This is the start of the Watchfulness webapp.</p>
+			<p><i>${message}</i></p>   
+  <form action="APIWorkingDaysServlet" method="post">  <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date -->
+    
+    <label class="pad_top">Location:</label>
+    Choose date of Sobriety:
+    
+    <!-- https://stackoverflow.com/a/6813024s4/21495635 -->	
+    <input
+      type="date" id = "datefield" name="start_date"
+      min="1900-04-01"
+      max = onfocus
+      onfocus="this.max=new Date().toISOString().split('T')[0]"
+      required
+      /> 
+      
+    <span class="validity"></span>
+    
+	<!-- Code for time picker -->
+	   <p><i>${time_message}</i></p>  
+		<label for="appt">Choose a time  sobriety:</label>
+		<input 
+		type   = "time" id="timefield" name="24hr_time"
+		max    = "Max time is determined by script with function 'validate_time()'"
+		onblur = "validate_time()"
+		/>
+		
+	<small>Time is an optional parameter</small>
+	<p>
+	   <label>&nbsp;</label><br>  
+	   <button>Submit</button>
+	   </p>
+	    
+  </form>
+  
+<!-----------------------------SCRIPTS--------------------------------->
+  <script>
+	/**
+	* This script makes it so that a user cannot input a time 
+	* that exceeds the current time, if the user selected date
+	* and the current date are the same
+	*/
+	
+	document.getElementById("timefield").addEventListener("change", validate_time) // listen to event when change in field occurs
+	document.getElementById("datefield").addEventListener("change", validate_time) // listen to event
+    //fucntion that checks for validation
+function validate_time() {
+	console.log ("\n -- On current user selection -- ");
+   	const dateTime = new Date(); // get current date and time information
+   	
+   	console.log (dateTime);
+   	//console.log ( "ISO TO STRING: " + dateTime.toISOString());
+   	
+   	const userDateInput = document.getElementById("datefield").value; // get user input of day
+	const currentDate =   dateTime.toISOString().split('T')[0]  // format current date as "YYYY-MM-DD"
+	var maxTime = null; // final variable that determines the max time a user can select
+	
+	console.log ("User selected date is: " + userDateInput);
+	console.log ("Current date is: " + currentDate);
+	
+	// var current_time = dateTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) // current time =  ex. 09:56 PM
+	var current_time = dateTime.toLocaleTimeString("en-GB")    // current time =  ex. 09:56 PM
+	current_time = current_time.slice(0, 5); // slice off AM/PM elements				       // current tine =  ex. 09:56
+	console.log ("The Current Time is: " + current_time);
+	
+	/*If it's the current day, the user can only select previous times
+		E.X. If user selects "3/30/2023" on the current day "3/30/2023"
+			 And current time is 3:30pm, user can only select times before or at 3:30pm
+	*/
+	const timefield = document.getElementById("timefield");
+	if (userDateInput == currentDate){ // if it is the current day
+		//console.log ("Same Days");
+		maxTime = current_time;
+		timefield.setAttribute ("max", maxTime ); // set max time user can select to current time
+		// document.getElementById("timefield").max= maxTime // does the same thing as above line of code
+	} else{
+		//console.log ("Different Days");
+		maxTime = "null";
+		timefield.setAttribute ("max", null ) // max time is set to null
+	} // end if else
+	
+console.log ("Max time is: "+ maxTime);
+
+} // end fucntion validate_time()
+
+/**
+ * This function sets the value first seen in the time picker
+ * to the user's current time.
+ */
+// NOT CURRENTLY DOING WHAT IS INTENDED
+function setCurrentTime(){
+	const dateTime = new Date(); // get current date and time information
+	var current_time = dateTime.toLocaleTimeString("en-GB")    // current time =  ex. 09:56 PM
+	current_time = current_time.slice(0, 5); // slice off AM/PM elements				      
+	console.log ("The Current Value time is: " + current_time);
+	
+	document.getElementById("timefield").value = "12:00"
+	//const timefield = document.getElementById("timefield"); // find the timefield object
+	//timefield.setAttribute ("value", "05:00" ); // set max time user can select to current time
+	
+} // end fucntion setCurrentTime()
+	
+</script>
+		</main>
+
+		<footer>
+			<p>©Watchfulness - 2023 All Rights Reserved</p>
+		</footer>
+	</body>
+</body>
+</html>
